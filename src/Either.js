@@ -35,16 +35,6 @@ class Left extends Either {
     orElse(f) {
         return f(this.value); 
     }
-    chain(f) { 
-        return this; // noop
-    }
-    getOrElseThrow(a) { 
-        throw new Error(a);
-    }
-
-    filter(f) { 
-        return this; // noop
-    }
     isLeft() {
         return true;
     }
@@ -64,15 +54,6 @@ class Right extends Either {
         return this; //noop
     }
 
-    chain(f) { 
-        return f(this.value);
-    }
-    getOrElseThrow(_) { 
-        return this.value;
-    }
-    filter(f) { 
-        return Either.fromNullable(f(this.value) ? this.value : null);
-    }
     isRight() {
         return true;
     }
