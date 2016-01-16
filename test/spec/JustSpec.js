@@ -27,4 +27,10 @@ describe('Just', () => {
             expect(Just.of(10).isNothing()).toBe(false);
         });
     });
+
+    describe('getOrElse()', () => {
+        it('should return the stored value', () => {
+            expect(Just.of(10).getOrElse(20)).toBe(10);
+        });
+    })
 });

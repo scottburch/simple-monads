@@ -26,15 +26,11 @@ var Maybe = module.exports = class Maybe extends Monad {
 class Just extends Maybe {
 
     map(f) {
-        return new Just(f(this.value));
+        return Maybe.of(f(this.value));
     }
 
     getOrElse() {
         return this.value;
-    }
-
-    filter(f) {
-        Maybe.fromNullable(f(this.value) ? this.value : null);
     }
 
     isJust() {
@@ -51,13 +47,8 @@ class Nothing extends Maybe {
         return this; // noop (mapping over nothing)
     }
 
-
     getOrElse(other) {
         return other;
-    }
-
-    filter() {
-        return this.value;
     }
 
     isNothing() {
