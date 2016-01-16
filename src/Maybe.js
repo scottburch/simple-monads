@@ -1,6 +1,7 @@
 "use strict";
+var Monad = require('./Monad');
 
-var Maybe = module.exports = class Maybe {
+var Maybe = module.exports = class Maybe extends Monad {
     static get just() {
         return Just;
     }
@@ -9,28 +10,20 @@ var Maybe = module.exports = class Maybe {
         return Nothing;
     }
 
-    static fromNullable(a) {
-        return a !== null && a !== undefined ? Just.of(a) : new Nothing();
-    }
-
     static of(a) {
-        return new Just(a);
+        return a !== null && a !== undefined ? new Just(a) : new Nothing();
     }
 
-    get isNothing() {
+    isNothing() {
         return false;
     }
 
-    get isJust() {
+    isJust() {
         return false;
     }
 };
 
 class Just extends Maybe {
-    constructor(value) {
-        super();
-        this.value = value;
-    }
 
     map(f) {
         return new Just(f(this.value));
@@ -58,9 +51,6 @@ class Nothing extends Maybe {
         return this; // noop (mapping over nothing)
     }
 
-    get value() {
-        throw new TypeError("Can't extract the value of a Nothing.");
-    }
 
     getOrElse(other) {
         return other;
@@ -70,7 +60,7 @@ class Nothing extends Maybe {
         return this.value;
     }
 
-    get isNothing() {
+    isNothing() {
         return true;
     }
 

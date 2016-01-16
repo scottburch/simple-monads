@@ -16,4 +16,15 @@ describe('Just', () => {
         });
     });
 
+    describe('isJust()', () => {
+        it('should return true', () => {
+            expect(Just.of(10).isJust()).toBe(true);
+        })
+    });
+
+    describe('isNothing()', () => {
+        it('should return false', () => {
+            expect(Just.of(10).isNothing()).toBe(false);
+        });
+    });
 });

@@ -1,9 +1,7 @@
 "use strict";
+var Monad = require('./Monad');
 
-module.exports = class Identity {
-    constructor(value) {
-        this.value = value;
-    }
+module.exports = class Identity extends Monad {
     static of(v) {
         return new Identity(v);
     }
