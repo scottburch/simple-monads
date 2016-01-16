@@ -15,4 +15,5 @@ describe('Maybe monad', () => {
         });
     });
 
+
 });

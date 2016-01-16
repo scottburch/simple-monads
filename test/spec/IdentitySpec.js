@@ -7,11 +7,11 @@ describe('Identity modal', () => {
         });
     });
 
-    describe('map', () => {
-        it('should run a function passing the value of the monad', () => {
-            var fn = jasmine.createSpy();
-            expect(Identity.of(10).map(fn));
-            expect(fn).toHaveBeenCalledWith(10);
+    describe('map()', () => {
+        it('should run the passed function with the value', () => {
+            var spy = jasmine.createSpy().and.callFake(() => 20);
+            expect(Identity.of(10).map(spy).toString()).toBe('Identity (20)');
+            expect(spy).toHaveBeenCalledWith(10);
         });
     });
 

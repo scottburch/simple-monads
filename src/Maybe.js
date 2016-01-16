@@ -33,7 +33,7 @@ class Just extends Maybe {
     }
 
     map(f) {
-        return of(f(this.value));
+        return new Just(f(this.value));
     }
 
     getOrElse() {
