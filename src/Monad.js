@@ -5,7 +5,7 @@ module.exports = class Monad {
         this.value = value;
     }
 
-    value() {
+    get() {
         return value;
     }
 };
