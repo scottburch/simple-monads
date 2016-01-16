@@ -21,6 +21,10 @@ var Maybe = module.exports = class Maybe extends Monad {
     isJust() {
         return false;
     }
+
+    static lift(fn) {
+        return v => Maybe.of(v).map(fn);
+    }
 };
 
 class Just extends Maybe {
