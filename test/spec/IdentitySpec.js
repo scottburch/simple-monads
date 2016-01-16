@@ -20,5 +20,5 @@ describe('Identity modal', () => {
             var deep = Identity.of(Identity.of(Identity.of(10)));
             expect(deep.join().toString()).toBe('Identity (10)');
         });
-    })
+    });
 });
