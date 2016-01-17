@@ -1,4 +1,4 @@
-var Just = require('../../lib/simple-monads').Maybe.just;
+var Just = require('../../lib/simple-monads').Just;
 
 
 describe('Just', () => {

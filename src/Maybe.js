@@ -1,15 +1,7 @@
 "use strict";
 var Monad = require('./Monad');
 
-var Maybe = module.exports = class Maybe extends Monad {
-    static get just() {
-        return Just;
-    }
-
-    static get nothing() {
-        return Nothing;
-    }
-
+class Maybe extends Monad {
     static of(a) {
         return a !== null && a !== undefined ? new Just(a) : new Nothing();
     }
@@ -63,3 +55,9 @@ class Nothing extends Maybe {
         return 'Maybe.Nothing';
     }
 }
+
+module.exports = {
+    Maybe: Maybe,
+    Just: Just,
+    Nothing: Nothing
+};
