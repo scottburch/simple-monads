@@ -1,4 +1,4 @@
-var Nothing = require('../../src/Maybe').nothing;
+var Nothing = require('../../lib/simple-monads').Maybe.nothing;
 
 describe('Nothing monad', () => {
     describe('map()', () => {

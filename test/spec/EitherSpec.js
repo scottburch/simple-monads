@@ -1,4 +1,4 @@
-var Either = require('../../src/Either');
+var Either = require('../../lib/simple-monads').Either;
 describe('Either monad', () => {
 
     describe('of()', () => {

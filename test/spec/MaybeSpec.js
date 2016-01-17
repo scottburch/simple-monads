@@ -1,4 +1,4 @@
-var Maybe = require('../../src/Maybe');
+var Maybe = require('../../lib/simple-monads').Maybe;
 
 describe('Maybe monad', () => {
     describe('of()', () => {
