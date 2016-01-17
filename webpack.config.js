@@ -1,5 +1,5 @@
 module.exports = {
-    entry: 'src/SimpleMonad.js',
+    entry: './src/SimpleMonads.js',
     output: {
         filename: 'lib/simple-monads.js',
         libraryTarget: "umd",

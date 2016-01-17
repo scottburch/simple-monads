@@ -4,7 +4,7 @@
   "description": "Simple monad library",
   "main": "lib/simple-monads.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cd test;jasmine"
   },
   "author": "Scott Burch",
   "license": "MIT",
@@ -14,6 +14,11 @@
     "jasmine": "^2.4.1",
     "lodash": "^4.0.0",
     "ramda": "^0.19.1",
-    "webpack": "^1.12.11"
+    "webpack": "^1.12.11",
+    "webpack-beep-plugin": "0.0.1"
+  },
+  "repository" :
+  { "type" : "git",
+    "url" : "git@github.com:scottburch/simple-monads.git"
   }
 }

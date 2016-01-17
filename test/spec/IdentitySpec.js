@@ -1,4 +1,4 @@
-var Identity = require('../../src/Identity.js');
+var Identity = require('../../lib/simple-monads').Identity;
 
 describe('Identity modal', () => {
     describe('of()', () => {
