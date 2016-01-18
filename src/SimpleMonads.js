@@ -4,5 +4,6 @@ module.exports = {
     Just: require('./Maybe').Just,
     Nothing: require('./Maybe').Nothing,
     Either: require('./Either'),
-    IO: require('./IO')
+    IO: require('./IO'),
+    List: require('./List')
 };

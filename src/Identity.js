@@ -8,9 +8,6 @@ module.exports = class Identity extends Monad {
     map(f) {
         return Identity.of(f(this.value));
     }
-    join() {
-        return this.value instanceof Identity ? this.value.join() : this;
-    }
     toString() {
         return `Identity (${this.value})`;
     }

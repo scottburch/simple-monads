@@ -5,7 +5,12 @@ module.exports = class Monad {
         this.value = value;
     }
 
+    join() {
+        return this.value instanceof Monad ? this.value.join() : this;
+    }
+
+
     get() {
-        return value;
+        return this.value;
     }
 };
