@@ -1,6 +1,6 @@
 {
   "name": "simple-monads",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Simple monad library",
   "main": "lib/simple-monads.js",
   "scripts": {
