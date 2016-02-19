@@ -13,4 +13,8 @@ module.exports = class Monad {
     get() {
         return this.value;
     }
+
+    bind(fn) {
+        return fn(this.value);
+    }
 };

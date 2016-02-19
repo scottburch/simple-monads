@@ -10,7 +10,8 @@
   "author": "Scott Burch",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.0.0"
+    "lodash": "^4.0.0",
+    "ramda": "^0.19.1"
   },
   "devDependencies": {
     "babel": "^6.3.26",
@@ -19,8 +20,8 @@
     "webpack": "^1.12.11",
     "webpack-beep-plugin": "0.0.1"
   },
-  "repository" :
-  { "type" : "git",
-    "url" : "git@github.com:scottburch/simple-monads.git"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:scottburch/simple-monads.git"
   }
 }

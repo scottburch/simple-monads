@@ -28,4 +28,14 @@ describe('Maybe monad', () => {
             expect(spy.calls.count()).toBe(1);
         });
     });
+
+    describe('toEither()', () => {
+        it('returns a Right if there is a value', () => {
+            expect(Maybe.of(10).toEither().isRight()).toBe(true);
+        });
+
+        it('returns a Left if there is no value', () => {
+            expect(Maybe.of().toEither().isLeft()).toBe(true);
+        });
+    });
 });

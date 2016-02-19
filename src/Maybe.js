@@ -1,5 +1,6 @@
 "use strict";
 var Monad = require('./Monad');
+var Either = require('./Either');
 
 class Maybe extends Monad {
     static of(a) {
@@ -16,6 +17,10 @@ class Maybe extends Monad {
 
     static lift(fn) {
         return v => Maybe.of(v).map(fn);
+    }
+
+    toEither() {
+        return Either.of(this.value);
     }
 };
 
