@@ -16,13 +16,11 @@ describe('Maybe monad', () => {
     });
 
     describe('lift()', () => {
-        it('returns a function that returns a maybe monad g iven a function', () => {
+        it('returns a function that returns a maybe monad given a function', () => {
             var spy = jasmine.createSpy().and.callFake(v => v*2);
-            var safeFn = Maybe.lift(spy);
-            expect(safeFn(undefined).isNothing()).toBe(true);
-            expect(spy).not.toHaveBeenCalled();
+            var maybeFn = Maybe.lift(spy);
 
-            var ret = safeFn(10);
+            var ret = maybeFn(10);
             expect(ret.toString()).toBe('Maybe.Just(20)');
             expect(ret.isJust()).toBe(true);
             expect(spy.calls.count()).toBe(1);

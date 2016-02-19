@@ -3,8 +3,11 @@ module.exports = {
     output: {
         filename: 'lib/simple-monads.js',
         libraryTarget: "umd",
-        library: "simpleMonads"
+//        library: "simpleMonads"
     },
+    node: {
+        global: false
+    }
 //    externals: {
         // require("jquery") is external and available
         //  on the global var jQuery

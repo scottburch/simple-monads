@@ -1,6 +1,7 @@
 "use strict";
 var Monad = require('./Monad');
-var Either = require('./Either');
+var Either = require('./Either')
+var R = require('ramda');
 
 class Maybe extends Monad {
     static of(a) {
@@ -16,7 +17,7 @@ class Maybe extends Monad {
     }
 
     static lift(fn) {
-        return v => Maybe.of(v).map(fn);
+        return R.compose(Maybe.of, fn);
     }
 
     toEither() {
