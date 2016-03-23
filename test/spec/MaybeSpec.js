@@ -4,7 +4,7 @@ describe('Maybe monad', () => {
     describe('of()', () => {
         it('should return Nothing if value is undefined', () => {
             expect(Maybe.of(undefined).toString()).toBe('Maybe.Nothing');
-        })
+        });
 
         it('should return Nothing if value is null', () => {
             expect(Maybe.of(null).toString()).toBe('Maybe.Nothing');
@@ -34,6 +34,38 @@ describe('Maybe monad', () => {
 
         it('returns a Left if there is no value', () => {
             expect(Maybe.of().toEither().isLeft()).toBe(true);
+        });
+    });
+
+    describe('map()', () => {
+        it('should not run if the maybe is undefined or null', () => {
+            var spy = jasmine.createSpy();
+            Maybe.of(undefined).map(spy);
+            Maybe.of(null).map(spy);
+            expect(spy).not.toHaveBeenCalled();
+        });
+
+        it('should run if the maybe is not undefined or null', () => {
+            var spy = jasmine.createSpy();
+            Maybe.of('xx').map(spy);
+            expect(spy).toHaveBeenCalledWith('xx');
+        });
+
+        it('should chain maps returning a maybe', () => {
+
+            var spy1 = jasmine.createSpy().and.returnValue('yy');
+            var spy2 = jasmine.createSpy().and.returnValue('zz');
+            var ret = Maybe.of('xx').map(spy1).map(spy2);
+            expect(spy1).toHaveBeenCalledWith('xx');
+            expect(spy2).toHaveBeenCalledWith('yy');
+            expect(ret.toString()).toBe('Maybe.Just(zz)');
+
+            spy1 = jasmine.createSpy().and.returnValue(undefined);
+            spy2 = jasmine.createSpy();
+            var ret = Maybe.of('xx').map(spy1).map(spy2);
+            expect(spy1).toHaveBeenCalledWith('xx');
+            expect(spy2).not.toHaveBeenCalled();
+            expect(ret.toString()).toBe('Maybe.Nothing');
         });
     });
 });
