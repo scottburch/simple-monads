@@ -33,7 +33,7 @@ class Left extends Either {
         return other; 
     }
     orElse(f) {
-        return f(this.value); 
+        return Either.of(f(this.value));
     }
     isLeft() {
         return true;

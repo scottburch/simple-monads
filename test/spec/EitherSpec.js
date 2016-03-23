@@ -55,7 +55,7 @@ describe('Either monad', () => {
 
         it('should run the passed function if left', () => {
             var spy = jasmine.createSpy().and.returnValue(10);
-            expect(Either.of(undefined).orElse(spy)).toBe(10);
+            expect(Either.of(undefined).orElse(spy).get()).toBe(10);
             expect(spy).toHaveBeenCalled();
         })
     });
