@@ -1,4 +1,5 @@
 var Monad = require('../../src/Monad');
+var Maybe = require('../../lib/simple-monads').Maybe;
 var R = require('ramda');
 
 describe('Monad', () => {
@@ -15,10 +16,9 @@ describe('Monad', () => {
     });
 
     describe('.flatMap()', () => {
-
         it('should return the monad returned from the passed function', () => {
-            var spy = jasmine.createSpy().and.returnValue(new Monad(20));
-            expect(new Monad(10).flatMap(spy).get()).toBe(20);
+            var spy = jasmine.createSpy().and.returnValue(Maybe.of(20));
+            expect(Maybe.of(10).flatMap(spy).get()).toBe(20);
             expect(spy).toHaveBeenCalledWith(10);
         });
     });

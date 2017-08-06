@@ -27,6 +27,18 @@ describe('Maybe monad', () => {
         });
     });
 
+    describe('ap()', () => {
+        it('should run the function in the monad on the passed value and return a maybe', () => {
+            const spy = jasmine.createSpy().and.callFake(v => v * 2);
+            expect(Maybe.of(spy).ap(10).get()).toBe(20);
+        });
+
+        it('should run the function in the monad on the value of the passed monad and return a maybe', () => {
+            const spy = jasmine.createSpy().and.callFake(v => v * 2);
+            expect(Maybe.of(spy).ap(Maybe.of(10)).get()).toBe(20);
+        });
+    });
+
     describe('toEither()', () => {
         it('returns a Right if there is a value', () => {
             expect(Maybe.of(10).toEither().isRight()).toBe(true);

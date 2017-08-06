@@ -10,7 +10,7 @@ module.exports = class Monad {
     }
 
     flatMap(f) {
-        return f(this.value);
+        return this.map(f).join();
     }
 
     get() {

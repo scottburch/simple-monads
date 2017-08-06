@@ -30,7 +30,11 @@ class Just extends Maybe {
     map(f) {
         return Maybe.of(f(this.value));
     }
-    
+
+    ap(v) {
+        return Maybe.of(this.value(Maybe.of(v).join().get()));
+    }
+
     getOrElse() {
         return this.value;
     }
