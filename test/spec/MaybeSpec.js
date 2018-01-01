@@ -80,4 +80,26 @@ describe('Maybe monad', () => {
             expect(ret.toString()).toBe('Maybe.Nothing');
         });
     });
+
+    describe('orElse()', () => {
+        it('should not run if maybe is Just', () => {
+            const spy1 = jasmine.createSpy();
+            const spy2 = jasmine.createSpy();
+
+            Maybe.of(10).orElse(spy1).map(spy2);
+
+            expect(spy1).not.toHaveBeenCalled();
+            expect(spy2).toHaveBeenCalledWith(10);
+        });
+
+        it('should run if maybe is Nothing', () => {
+            const spy1 = jasmine.createSpy().and.returnValue(10);
+            const spy2 = jasmine.createSpy();
+
+            Maybe.of(undefined).orElse(spy1).map(spy2);
+
+            expect(spy1).toHaveBeenCalled();
+            expect(spy2).toHaveBeenCalledWith(10);
+        });
+    });
 });

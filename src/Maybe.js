@@ -39,6 +39,10 @@ class Just extends Maybe {
         return this.value;
     }
 
+    orElse() {
+        return this
+    }
+
     isJust() {
         return true;
     }
@@ -55,6 +59,10 @@ class Nothing extends Maybe {
 
     getOrElse(other) {
         return other;
+    }
+
+    orElse(f) {
+        return Maybe.of(f(this.value));
     }
 
     isNothing() {
