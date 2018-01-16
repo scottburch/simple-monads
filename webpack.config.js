@@ -3,6 +3,7 @@ module.exports = {
     output: {
         filename: 'lib/simple-monads.js',
         libraryTarget: "umd",
+        library: "SimpleMonads"
     },
     node: {
         global: false
