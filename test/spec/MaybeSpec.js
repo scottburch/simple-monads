@@ -35,7 +35,7 @@ describe('Maybe monad', () => {
 
         it('should run the function in the monad on the value of the passed monad and return a maybe', () => {
             const spy = jasmine.createSpy().and.callFake(v => v * 2);
-            expect(Maybe.of(spy).ap(Maybe.of(10)).get()).toBe(20);
+            expect(Maybe.of(spy).ap(10).get()).toBe(20);
         });
     });
 

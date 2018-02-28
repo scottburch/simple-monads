@@ -17,7 +17,7 @@ describe('Identity modal', () => {
 
     describe('join', () => {
         it("should unwrap a wrapped modal", () => {
-            var deep = Identity.of(Identity.of(Identity.of(10)));
+            var deep = Identity.of(Identity.of(10));
             expect(deep.join().toString()).toBe('Identity (10)');
         });
     });

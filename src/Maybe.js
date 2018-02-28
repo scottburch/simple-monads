@@ -1,7 +1,7 @@
 "use strict";
-var Monad = require('./Monad');
-var Either = require('./Either')
-var R = require('ramda');
+const Monad = require('./Monad');
+const Either = require('./Either');
+const R = require('ramda');
 
 class Maybe extends Monad {
     static of(a) {
@@ -32,7 +32,7 @@ class Just extends Maybe {
     }
 
     ap(v) {
-        return Maybe.of(this.value(Maybe.of(v).join().get()));
+        return Maybe.of(this.value(Maybe.of(v).join()));
     }
 
     getOrElse() {

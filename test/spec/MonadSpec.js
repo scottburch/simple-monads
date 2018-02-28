@@ -17,8 +17,8 @@ describe('Monad', () => {
 
     describe('.flatMap()', () => {
         it('should return the monad returned from the passed function', () => {
-            var spy = jasmine.createSpy().and.returnValue(Maybe.of(20));
-            expect(Maybe.of(10).flatMap(spy).get()).toBe(20);
+            const spy = jasmine.createSpy().and.returnValue(Maybe.of(20));
+            expect(Maybe.of(10).flatMap(spy).join()).toBe(20);
             expect(spy).toHaveBeenCalledWith(10);
         });
     });

@@ -6,11 +6,11 @@ module.exports = class Monad {
     }
 
     join() {
-        return this.value instanceof Monad ? this.value.join() : this.value;
+        return this.value;
     }
 
     flatMap(f) {
-        return this.map(f).join();
+        return f(this.value);
     }
 
     get() {
