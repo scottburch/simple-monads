@@ -35,6 +35,9 @@ class Left extends Either {
     orElse(f) {
         return Either.of(f(this.value));
     }
+    cata(fLeft, fRight) {
+        return fLeft();
+    }
     isLeft() {
         return true;
     }
@@ -53,7 +56,9 @@ class Right extends Either {
     orElse() { 
         return this; //noop
     }
-
+    cata(fLeft, fRight) {
+        return fRight(this.value);
+    }
     isRight() {
         return true;
     }

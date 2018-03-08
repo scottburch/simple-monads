@@ -60,5 +60,27 @@ describe('Either monad', () => {
         })
     });
 
+    describe('cata()', () => {
+        let leftSpy, rightSpy;
+
+        beforeEach(() => {
+            leftSpy = jasmine.createSpy();
+            rightSpy = jasmine.createSpy();
+        });
+
+        it('should run the left function on a left', () => {
+            Either.of(undefined).cata(leftSpy, rightSpy);
+
+            expect(leftSpy).toHaveBeenCalled();
+            expect(rightSpy).not.toHaveBeenCalled();
+        });
+
+        it('should run the right function passing the value on a right', () => {
+            Either.of(10).cata(leftSpy, rightSpy);
+
+            expect(leftSpy).not.toHaveBeenCalled();
+            expect(rightSpy).toHaveBeenCalledWith(10);
+        });
+    });
 
 });
