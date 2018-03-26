@@ -1,6 +1,18 @@
 var Either = require('../../lib/simple-monads').Either;
 describe('Either monad', () => {
 
+    describe('left()', () => {
+        it('should generate a left with a value', () => {
+            expect(Either.left(10).join()).toBe(10);
+        })
+    });
+
+    describe('right()', () => {
+        it('should generate a right with a value', () => {
+            expect(Either.right(10).join()).toBe(10);
+        });
+    });
+
     describe('of()', () => {
         it('should assign left if value is null or undefined', () => {
             expect(Either.of(null).isLeft()).toBe(true);
@@ -55,8 +67,8 @@ describe('Either monad', () => {
 
         it('should run the passed function if left', () => {
             var spy = jasmine.createSpy().and.returnValue(10);
-            expect(Either.of(undefined).orElse(spy).get()).toBe(10);
-            expect(spy).toHaveBeenCalled();
+            expect(Either.left(20).orElse(spy).get()).toBe(10);
+            expect(spy).toHaveBeenCalledWith(20);
         })
     });
 

@@ -27,7 +27,7 @@ class Left extends Either {
         return this; // noop
     }
     get() {
-        throw new TypeError("Can't extract the value of a Left(a).");
+        return this.value;
     }
     getOrElse(other) {
         return other; 
@@ -36,7 +36,7 @@ class Left extends Either {
         return Either.of(f(this.value));
     }
     cata(fLeft, fRight) {
-        return fLeft();
+        return fLeft(this.value);
     }
     isLeft() {
         return true;
