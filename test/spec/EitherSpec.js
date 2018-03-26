@@ -48,6 +48,20 @@ describe('Either monad', () => {
         });
     });
 
+    describe('flatMap()', () => {
+        it('should run on a right', () => {
+            const spy = jasmine.createSpy().and.returnValue(10);
+            expect(Either.right(20).flatMap(spy)).toBe(10);
+            expect(spy).toHaveBeenCalledWith(20);
+        });
+
+        it('should not run on a left', () => {
+            const spy = jasmine.createSpy();
+            expect(Either.left(20).flatMap(spy).cata(() => 10, () => 20)).toBe(10);
+            expect(spy).not.toHaveBeenCalled();
+        })
+    });
+
     describe('getOrElse()', () => {
         it('should return the the value of the either if right', () => {
             expect(Either.of(10).getOrElse(20)).toBe(10);

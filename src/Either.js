@@ -20,15 +20,22 @@ var Either = module.exports = class Either extends Monad {
     isRight() {
         return false;
     }
-}
+};
+
 class Left extends Either {
 
     map() {
         return this; // noop
     }
+
+    flatMap() {
+        return this; // noop
+    }
+
     get() {
         return this.value;
     }
+
     getOrElse(other) {
         return other; 
     }
