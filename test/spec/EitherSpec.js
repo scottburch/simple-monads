@@ -59,7 +59,24 @@ describe('Either monad', () => {
             const spy = jasmine.createSpy();
             expect(Either.left(20).flatMap(spy).cata(() => 10, () => 20)).toBe(10);
             expect(spy).not.toHaveBeenCalled();
-        })
+        });
+
+        it('should work with promises', (done) => {
+            Either.of(10)
+                .flatMap(v => new Promise((resolve, reject) =>
+                    setTimeout(() => resolve(Either.of(v * 2)))
+                ))
+                .flatMap(v => {
+                    expect(v).toBe(20);
+                    return Either.of(v * 2);
+                })
+                .flatMap(v => new Promise((resolve, reject) => {
+                    expect(v).toBe(40);
+                    resolve(Either.of(v * 2));
+                }))
+                .flatMap(v => expect(v).toBe(80) || Either.of(10))
+                .flatMap(done);
+        });
     });
 
     describe('getOrElse()', () => {
@@ -92,6 +109,18 @@ describe('Either monad', () => {
         beforeEach(() => {
             leftSpy = jasmine.createSpy();
             rightSpy = jasmine.createSpy();
+        });
+
+        it('should work with promises', (done) => {
+            Either.of(10)
+                .flatMap(v => new Promise((resolve, reject) => setTimeout(() => resolve(Either.of(v * 2)))))
+                .cata(v => {}, v =>
+                    new Promise((resolve, reject) => setTimeout(() => resolve(Either.left(100))))
+                )
+                .cata(v => {
+                    expect(v).toBe(100);
+                    done();
+                }, v => {})
         });
 
         it('should run the left function on a left', () => {
