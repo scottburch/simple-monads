@@ -25,7 +25,32 @@ class Maybe extends Monad {
     }
 };
 
+class Future {
+    constructor(promise) {
+        this.promise = promise;
+    }
+
+
+    flatMap(f) {
+        return new Future(this.promise.then(m => m.flatMap(f)));
+    }
+
+    join() {
+        return this.promise;
+    }
+}
+
+
 class Just extends Maybe {
+
+    flatMap(f) {
+        const result = f(this.value);
+        if(result instanceof Promise) {
+            return new Future(result);
+        } else {
+            return result;
+        }
+    }
 
     map(f) {
         return Maybe.of(f(this.value));

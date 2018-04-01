@@ -49,7 +49,28 @@ describe('Maybe monad', () => {
         });
     });
 
+    describe('flatMap()', () => {
+        it('should work with promises', (done) => {
+            Maybe.of(10)
+                .flatMap(v => new Promise((resolve, reject) =>
+                    setTimeout(() => resolve(Maybe.of(v * 2)))
+                ))
+                .flatMap(v => {
+                    expect(v).toBe(20);
+                    return Maybe.of(v * 2);
+                })
+                .flatMap(v => new Promise((resolve, reject) => {
+                    expect(v).toBe(40);
+                    resolve(Maybe.of(v * 2));
+                }))
+                .flatMap(v => expect(v).toBe(80) || Maybe.of(10))
+                .flatMap(done);
+        });
+
+    });
+
     describe('map()', () => {
+
         it('should not run if the maybe is undefined or null', () => {
             var spy = jasmine.createSpy();
             Maybe.of(undefined).map(spy);
