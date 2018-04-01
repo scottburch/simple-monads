@@ -1,4 +1,4 @@
-"use strict";
+const Future = require('./Future');
 
 module.exports = class Monad {
     constructor(value) {
@@ -10,7 +10,8 @@ module.exports = class Monad {
     }
 
     flatMap(f) {
-        return f(this.value);
+        const result = f(this.value);
+        return result instanceof Promise ? new Future(result) : result;
     }
 
     get() {
