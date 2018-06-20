@@ -50,6 +50,11 @@ describe('Maybe monad', () => {
     });
 
     describe('flatMap()', () => {
+        it('should not get called if monad contains undefined', () => {
+            Maybe.of(undefined)
+                .flatMap(() => {throw 'should not be called'})
+        });
+
         it('should work with promises', (done) => {
             Maybe.of(10)
                 .flatMap(v => new Promise((resolve, reject) =>

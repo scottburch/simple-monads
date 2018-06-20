@@ -57,6 +57,10 @@ class Nothing extends Maybe {
         return this; // noop (mapping over nothing)
     }
 
+    flatMap(f) {
+        return this; // noop
+    }
+
     getOrElse(other) {
         return other;
     }
