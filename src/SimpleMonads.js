@@ -26,9 +26,12 @@ monet.Either.prototype.map = function(fn) {
 monet.Maybe.prototype.map = function(fn) {
     return this.flatMap(x => {
         const result = fn(x)
-        return isNotNull(result) ? monet.Maybe.Some(result) : monet.Either.None()
+        return isNotNull(result) ? monet.Maybe.Some(result) : monet.Maybe.None()
     })
 };
+
+monet.Nothing = monet.None;
+
 
 monet.Either.prototype.getOrElse = function(v) {
     return this.isRight() ? this.join() : v
@@ -48,4 +51,6 @@ monet.Maybe.prototype.orElse = function(fn) {
 
 const isNotNull = val => val !== undefined && val !== null;
 
-monet.Just.of = monet.Just
+monet.Just.of = monet.Just;
+monet.Some.of = monet.Some;
+monet.None.of = monet.None;

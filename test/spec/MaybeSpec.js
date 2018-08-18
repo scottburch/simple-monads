@@ -3,39 +3,23 @@ var Maybe = require('../../lib/simple-monads').Maybe;
 describe('Maybe monad', () => {
     describe('of()', () => {
         it('should return Nothing if value is undefined', () => {
-            expect(Maybe.of(undefined).toString()).toBe('Maybe.Nothing');
+            expect(Maybe.of(undefined).isNone()).toBe(true);
         });
 
         it('should return Nothing if value is null', () => {
-            expect(Maybe.of(null).toString()).toBe('Maybe.Nothing');
+            expect(Maybe.of(null).isNone()).toBe(true);
         });
 
         it('should return a Just wrapped value', () => {
-            expect(Maybe.of(10).toString()).toBe('Maybe.Just(10)');
+            expect(Maybe.of(10).join()).toBe(10);
         });
     });
 
-    describe('lift()', () => {
-        it('returns a function that returns a maybe monad given a function', () => {
-            var spy = jasmine.createSpy().and.callFake(v => v*2);
-            var maybeFn = Maybe.lift(spy);
-
-            var ret = maybeFn(10);
-            expect(ret.toString()).toBe('Maybe.Just(20)');
-            expect(ret.isJust()).toBe(true);
-            expect(spy.calls.count()).toBe(1);
-        });
-    });
 
     describe('ap()', () => {
         it('should run the function in the monad on the passed value and return a maybe', () => {
             const spy = jasmine.createSpy().and.callFake(v => v * 2);
-            expect(Maybe.of(spy).ap(10).get()).toBe(20);
-        });
-
-        it('should run the function in the monad on the value of the passed monad and return a maybe', () => {
-            const spy = jasmine.createSpy().and.callFake(v => v * 2);
-            expect(Maybe.of(spy).ap(10).get()).toBe(20);
+            expect(Maybe.of(10).ap(Maybe.of(spy)).join()).toBe(20);
         });
     });
 
@@ -55,22 +39,6 @@ describe('Maybe monad', () => {
                 .flatMap(() => {throw 'should not be called'})
         });
 
-        it('should work with promises', (done) => {
-            Maybe.of(10)
-                .flatMap(v => new Promise((resolve, reject) =>
-                    setTimeout(() => resolve(Maybe.of(v * 2)))
-                ))
-                .flatMap(v => {
-                    expect(v).toBe(20);
-                    return Maybe.of(v * 2);
-                })
-                .flatMap(v => new Promise((resolve, reject) => {
-                    expect(v).toBe(40);
-                    resolve(Maybe.of(v * 2));
-                }))
-                .flatMap(v => expect(v).toBe(80) || Maybe.of(10))
-                .flatMap(done);
-        });
 
     });
 
@@ -96,14 +64,14 @@ describe('Maybe monad', () => {
             var ret = Maybe.of('xx').map(spy1).map(spy2);
             expect(spy1).toHaveBeenCalledWith('xx');
             expect(spy2).toHaveBeenCalledWith('yy');
-            expect(ret.toString()).toBe('Maybe.Just(zz)');
+            expect(ret.join()).toBe('zz');
 
             spy1 = jasmine.createSpy().and.returnValue(undefined);
             spy2 = jasmine.createSpy();
             var ret = Maybe.of('xx').map(spy1).map(spy2);
             expect(spy1).toHaveBeenCalledWith('xx');
             expect(spy2).not.toHaveBeenCalled();
-            expect(ret.toString()).toBe('Maybe.Nothing');
+            expect(ret.isNone()).toBe(true);
         });
     });
 
