@@ -1,22 +1,29 @@
+const path = require('path');
+
 module.exports = {
     entry: './src/SimpleMonads.js',
     output: {
+        path: path.resolve('.'),
         filename: 'lib/simple-monads.js',
         libraryTarget: "umd",
-        library: "SimpleMonads"
+        library: "SimpleMonads",
+        globalObject: "this"
     },
-    node: {
-        global: false
-    },
+    // node: {
+    //     global: false
+    // },
+    mode: 'none',
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-//                include: [/src/, /helpers/],
-                query: {
-                    presets: ['es2015']
-                }
+                exclude: /node_modules/,
+                use: [{
+                    loader: 'babel-loader',
+                     options: {
+                         presets: ["env"]
+                     }
+                }]
             }
         ]
     },
