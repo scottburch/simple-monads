@@ -3,7 +3,11 @@ module.exports = monet;
 module.exports.default = monet;
 
 
-// Shim to make simple-monads backward compatible
+/**************************************************
+ * Shim to make simple-monads backward compatible
+ */
+
+
 monet.Either.left = monet.Either.Left;
 monet.Either.right = monet.Either.Right;
 
